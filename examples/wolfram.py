@@ -1,9 +1,9 @@
-from cltl.combot.infra.config import ConfigurationManager
+from cltl.combot.infra.config.k8config import K8LocalConfigurationContainer
 from cltl.factual_question_processing.wolfram_responder import WolframResponder
 
-config_manager = ConfigurationManager()
-config = config_manager.get_config("credentials")
-credentials = config.get("wolfram")
+config_manager = K8LocalConfigurationContainer()
+config_manager.load_configuration("./../config/credentials.config")
+credentials = config_manager.get_config("credentials", "wolfram")
 
 replier = WolframResponder(credentials=credentials)
 

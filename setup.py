@@ -25,6 +25,7 @@ setup(
     python_requires='>=3.7',
     install_requires=[
         'requests~=2.25',
+        'nltk~=3.4.4',
         "cltl.combot"
     ],
     extras_require={

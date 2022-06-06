@@ -6,10 +6,11 @@ import re
 import urllib.error
 import urllib.parse
 import urllib.request
-from typing import Optional, Tuple, Union
+from typing import Optional, Tuple
 
 import nltk
 import requests
+
 from cltl.factual_question_processing.api import FactualResponder
 
 
@@ -25,7 +26,7 @@ class Wikipedia:
 
     @staticmethod
     def query(query):
-        # type: (Union[str, unicode]) -> Optional[Tuple[unicode, Optional[unicode]]]
+        # type: (str) -> Optional[Tuple[str, Optional[str]]]
         """
         Query Wikipedia
 
@@ -90,7 +91,6 @@ class Wikipedia:
                 else:
                     return query, extract, url
         except:
-            self._log.exception("Failed to query Wikipedia")
             return
 
     @staticmethod
@@ -128,14 +128,14 @@ class WikipediaResponder(FactualResponder):
     ]
 
     def __init__(self):
-        self._log = logger.getChild(self.__class__.__name__)
+        super(FactualResponder, self).__init__()
 
-    def factual_respond(self, questions):
+    def factual_respond(self, question):
         # type: (str) -> Optional[str]
 
         for que in self.WEB_CUE:
-            if utterance.transcript.lower().startswith(que):
-                result = Wikipedia.query(utterance.transcript.lower().replace(que, ""))
+            if question.lower().startswith(que):
+                result = Wikipedia.query(question.lower().replace(que, ""))
 
                 if result:
                     # Get Answer and Image URL from Wikipedia Query
