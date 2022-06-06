@@ -77,22 +77,21 @@ class WolframResponder(FactualResponder):
     def __init__(self, credentials):
         super(FactualResponder, self).__init__()
         self._app_id = credentials
+        self._wolfram = Wolfram(self._app_id)
 
     def factual_respond(self, question):
         # type: (str) -> Optional[str]
 
-        wolfram = Wolfram(self._app_id)
-
         transcript = question.lower().strip()
-        wellformed_query = wolfram.is_query(transcript)
+        wellformed_query = self._wolfram.is_query(transcript)
 
         for que in self.WEB_CUE:
             # if transcript.lower().startswith(que) or wellformed_query:
             if transcript.find(que.strip()) >= 0 or wellformed_query:
                 transcript = transcript.replace(que, "")
 
-                if wolfram.is_query(transcript):
-                    result = wolfram.query(transcript)
+                if self._wolfram.is_query(transcript):
+                    result = self._wolfram.query(transcript)
 
                     if result:
                         return result

@@ -67,7 +67,8 @@ class Wikipedia:
                             return None
         return None
 
-    def _query(self, query):
+    @staticmethod
+    def _query(query):
         query_websafe = urllib.parse.quote(query)
 
         try:
@@ -129,6 +130,7 @@ class WikipediaResponder(FactualResponder):
 
     def __init__(self):
         super(FactualResponder, self).__init__()
+        self._wikipedia = Wikipedia
 
     def factual_respond(self, question):
         # type: (str) -> Optional[str]
