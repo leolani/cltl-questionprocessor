@@ -4,7 +4,7 @@ project_dependencies ?= $(addprefix $(project_root)/, emissor cltl-combot cltl-r
 
 git_remote ?= https://github.com/leolani
 
-artifact_name = cltl.factual_question_processor
+artifact_name = cltl.factual_question_processing
 
 
 include util/make/makefile.base.mk
