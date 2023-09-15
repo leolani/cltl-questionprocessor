@@ -24,8 +24,8 @@ setup(
     package_data={'cltl.factual_question_processing': []},
     python_requires='>=3.7',
     install_requires=[
-        'requests~=2.25',
-        'nltk~=3.4.4',
+        'requests',
+        'nltk',
         "cltl.combot"
     ],
     extras_require={
