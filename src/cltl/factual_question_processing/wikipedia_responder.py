@@ -118,6 +118,8 @@ class Wikipedia:
 
 class WikipediaResponder(FactualResponder):
     WEB_CUE = [
+        "what is a ",
+        "what is an ",
         "can you search ",
         "can you look up ",
         "can you query ",
@@ -135,9 +137,9 @@ class WikipediaResponder(FactualResponder):
     def factual_respond(self, question):
         # type: (str) -> Optional[str]
 
-        for que in self.WEB_CUE:
-            if question.lower().startswith(que):
-                result = Wikipedia.query(question.lower().replace(que, ""))
+        for cue in self.WEB_CUE:
+            if question.lower().startswith(cue):
+                result = Wikipedia.query(question.lower().replace(cue, ""))
 
                 if result:
                     # Get Answer and Image URL from Wikipedia Query
@@ -150,3 +152,8 @@ class WikipediaResponder(FactualResponder):
                     return answer
 
                 break
+
+if __name__ == '__main__':
+    print(WikipediaResponder().factual_respond("What is a dog?"))
+
+
